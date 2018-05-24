@@ -10,7 +10,7 @@ If you like, please press  :star: :star: :star:
 
 ## Download
 
-FIXME
+Download from [latest release page](https://github.com/mattak/EnumSelection/releases).
 
 ## Usage
 
