@@ -1,8 +1,67 @@
 # EnumSelection
 
-EnumSelection can show popup which can select enum class & value.
+EnumSelection shows popups which can select enum class & value.
 
 If you like, please press  :star: :star: :star:
+
+## Why?
+
+Unity's default enum popup is easy to use by just declaring simple enum field.
+
+```csharp
+public class SampleBehaviour : MonoBehaviour {
+    public SampleEnum Value;
+}
+
+public enum SampleEnum {}
+```
+
+But there are some cases which require to handle multiple enum class at one field.
+For example, implementing skill slots that each of skills is defined by enum.
+
+```csharp
+[EnumSelectionEnable(Category = "Skill")]
+public enum AttackSkill
+{
+    DamageAdd,
+    DamageMutiply,
+    // ...
+}
+
+[EnumSelectionEnable(Category = "Skill")]
+public enum DefenceSkill
+{
+    DamageSubtract,
+    // ...
+}
+```
+
+EnumSelection handles multiple skill enums at one field.
+
+```csharp
+public class Accessory : MonoBehaviour
+{
+    [EnumSelectionOption(Category = "Skill")]
+    public EnumSelection[] Slot = new EnumSelection[3];
+
+    private void Start()
+    {
+        foreach(var skill in this.Slot)
+        {
+            if (skill.IsEnumClass<AttackSkill>())
+            {
+                var value = skill.GetEnum<AttackSkill>();
+                // apply attack skill
+            }
+            // ...
+        }
+    }
+}
+```
+
+It's very easy to handle multiple enum types and select enum type & value with popups.
+
+![multiple skills](./art/multiple_skills.png)
 
 ## Demo
 
@@ -74,6 +133,7 @@ public class Demo : MonoBehaviour {
     public EnumSelection Value;
 }
 ```
+
 
 ## License
 
