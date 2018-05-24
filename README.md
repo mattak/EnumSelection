@@ -2,7 +2,7 @@
 
 EnumSelection can show popup which can select enum class & value.
 
-If you like, please press  :star: :star: :star: :smile:
+If you like, please press  :star: :star: :star:
 
 ## Demo
 
@@ -19,8 +19,8 @@ Define enum with EnumSelectionEnable attribute.
 ```csharp
 [EnumSelectionEnable]
 public enum Sample {
-  Value1,
-  Value2,
+    Value1,
+    Value2,
 }
 ```
 
@@ -32,7 +32,9 @@ public class Demo : MonoBehaviour {
 }
 ```
 
-That's it! Now you can select any enums with EnumSelectionEnable attribute.
+That's it!
+
+Now you can select any enums with EnumSelectionEnable attribute.
 
 ### Parse
 
