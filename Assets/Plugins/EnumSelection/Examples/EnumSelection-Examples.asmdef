@@ -1,0 +1,11 @@
+{
+    "name": "EnumSelection-Examples",
+    "references": [
+        "EnumSelection-Scripts",
+        "EnumSelection-Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

@@ -1,0 +1,14 @@
+{
+    "name": "EnumSelection-Test",
+    "references": [
+        "EnumSelection-Scripts"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
