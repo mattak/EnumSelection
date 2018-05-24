@@ -15,9 +15,9 @@ namespace EnumSelectionTool.Example
         private void Start()
         {
             // get enum value with generics, type, non-generics
-            Debug.Log(this.Demo1.GetEnum<SampleEnum1>()?.ToString());
-            Debug.Log(this.Demo2.GetEnum(typeof(SampleEnum2))?.ToString());
-            Debug.Log(this.Demo3.GetEnum()?.ToString());
+            Debug.Log(this.Demo1.GetEnum<SampleEnum1>());
+            Debug.Log(this.Demo2.GetEnum(typeof(SampleEnum2)));
+            Debug.Log(this.Demo3.GetEnum());
 
             // check enum type safely
             if (this.Demo3.IsEnumClass<SampleEnum1>())

@@ -23,17 +23,23 @@ namespace EnumSelectionTool
         {
             if (this.EnumTypes == null)
             {
-                var typeNames =
-                        AppDomain.CurrentDomain.GetAssemblies().SelectMany(it => it.GetTypes())
-                            .Where(it => it.IsEnum)
-                            .Where(it => it.GetCustomAttribute(typeof(EnumSelectionEnable)) != null)
-                            .Select(it => new
-                            {
-                                Type = it,
-                                Name = it.FullName,
-                                Assembly = it.Assembly.GetName().Name
-                            })
-                    ;
+                var typeNames = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(it => it.GetTypes())
+                    .Where(it => it.IsEnum)
+                    .Select(it =>
+                    {
+                        var attributes = it.GetCustomAttributes(typeof(EnumSelectionEnable), false);
+                        if (!attributes.Any()) return null;
+
+                        return new
+                        {
+                            Type = it,
+                            Name = it.FullName,
+                            Assembly = it.Assembly.GetName().Name
+                        };
+                    })
+                    .Where(it => it != null);
+
                 this.EnumTypes = typeNames.Select(it => it.Type).ToList();
                 this.EnumNames = typeNames.Select(it => it.Name).ToList();
                 this.EnumAssemblyNames = typeNames.Select(it => it.Assembly).ToList();
