@@ -8,6 +8,10 @@ namespace EnumSelectionTool.Example
         public EnumSelection Demo2;
         public EnumSelection Demo3;
 
+        // show only specified category enums
+        [EnumSelectionOption(Category = "MyCategory")]
+        public EnumSelection CategoryDemo;
+
         private void Start()
         {
             // get enum value with generics, type, non-generics

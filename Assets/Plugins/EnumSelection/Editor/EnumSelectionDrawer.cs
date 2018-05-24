@@ -14,25 +14,26 @@ namespace EnumSelectionTool
         const float HeightPopup = 18f;
         const float HeightHelpBox = 36f;
 
-        private List<Type> EnumTypes;
-        private List<string> EnumNames;
-        private List<string> EnumAssemblyNames;
-        private float TotalHeight = HeightLabel + HeightPopup * 2;
+        protected List<Type> EnumTypes;
+        protected List<string> EnumNames;
+        protected List<string> EnumAssemblyNames;
+        protected float TotalHeight = HeightLabel + HeightPopup * 2;
 
-        void CheckInitialize()
+        protected virtual void CheckInitialize()
         {
             if (this.EnumTypes == null)
             {
                 var typeNames =
-                    AppDomain.CurrentDomain.GetAssemblies().SelectMany(it => it.GetTypes())
-                        .Where(it => it.IsEnum)
-                        .Where(it => it.GetCustomAttribute(typeof(EnumSelectionEnable)) != null)
-                        .Select(it => new
-                        {
-                            Type = it,
-                            Name = it.FullName,
-                            Assembly = it.Assembly.GetName().Name
-                        });
+                        AppDomain.CurrentDomain.GetAssemblies().SelectMany(it => it.GetTypes())
+                            .Where(it => it.IsEnum)
+                            .Where(it => it.GetCustomAttribute(typeof(EnumSelectionEnable)) != null)
+                            .Select(it => new
+                            {
+                                Type = it,
+                                Name = it.FullName,
+                                Assembly = it.Assembly.GetName().Name
+                            })
+                    ;
                 this.EnumTypes = typeNames.Select(it => it.Type).ToList();
                 this.EnumNames = typeNames.Select(it => it.Name).ToList();
                 this.EnumAssemblyNames = typeNames.Select(it => it.Assembly).ToList();

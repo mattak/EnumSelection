@@ -1,6 +1,6 @@
 ﻿namespace EnumSelectionTool.Example
 {
-    [EnumSelectionEnable]
+    [EnumSelectionEnable(Category = "MyCategory")]
     public enum SampleEnum2
     {
         Enum2Value1,
