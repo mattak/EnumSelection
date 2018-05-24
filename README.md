@@ -2,7 +2,7 @@
 
 EnumSelection can show popup which can select enum class & value.
 
-If you like, please press :star2: button! :smile:
+If you like, please press  :star: :star: :star: :smile:
 
 ## Demo
 
