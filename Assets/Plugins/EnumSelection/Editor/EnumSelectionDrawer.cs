@@ -16,6 +16,7 @@ namespace EnumSelectionTool
 
         private List<Type> EnumTypes;
         private List<string> EnumNames;
+        private List<string> EnumAssemblyNames;
         private float TotalHeight = HeightLabel + HeightPopup * 2;
 
         void CheckInitialize()
@@ -26,9 +27,15 @@ namespace EnumSelectionTool
                     AppDomain.CurrentDomain.GetAssemblies().SelectMany(it => it.GetTypes())
                         .Where(it => it.IsEnum)
                         .Where(it => it.GetCustomAttribute(typeof(EnumSelectionEnable)) != null)
-                        .Select(it => new {Type = it, Name = it.FullName});
+                        .Select(it => new
+                        {
+                            Type = it,
+                            Name = it.FullName,
+                            Assembly = it.Assembly.GetName().Name
+                        });
                 this.EnumTypes = typeNames.Select(it => it.Type).ToList();
                 this.EnumNames = typeNames.Select(it => it.Name).ToList();
+                this.EnumAssemblyNames = typeNames.Select(it => it.Assembly).ToList();
             }
         }
 
@@ -55,6 +62,7 @@ namespace EnumSelectionTool
             var rectPopup2 = new Rect(position.x, position.y + HeightLabel + HeightPopup, position.width, HeightPopup);
             var className = property.FindPropertyRelative("ClassName");
             var classValue = property.FindPropertyRelative("ClassValue");
+            var assemblyName = property.FindPropertyRelative("AssemblyName");
 
             this.CheckInitialize();
             EditorGUI.LabelField(rectLabel, property.name);
@@ -71,6 +79,7 @@ namespace EnumSelectionTool
                 if (classNameIndex >= 0)
                 {
                     className.stringValue = this.EnumNames[classNameIndex];
+                    assemblyName.stringValue = this.EnumAssemblyNames[classNameIndex];
 
                     var type = this.EnumTypes[classNameIndex];
                     var values = this.GetEnumValues(type);
