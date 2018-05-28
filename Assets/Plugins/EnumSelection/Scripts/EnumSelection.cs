@@ -65,6 +65,22 @@ namespace EnumSelectionTool
             return this.GetClass() == typeof(TEnum);
         }
 
+        public bool CanParse()
+        {
+            var type = this.GetClass();
+            if (type == null) return false;
+
+            try
+            {
+                Enum.Parse(type, this.ClassValue);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private object Parse(Type type)
         {
             try
@@ -74,6 +90,7 @@ namespace EnumSelectionTool
             catch (Exception)
             {
             }
+
             LogCannotParse(type);
             return null;
         }

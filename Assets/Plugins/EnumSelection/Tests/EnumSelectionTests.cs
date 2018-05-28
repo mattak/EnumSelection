@@ -65,6 +65,20 @@ namespace EnumSelectionTool
             Assert.IsFalse(new EnumSelection(EnumTest1.Value1).IsEnumClass<EnumTest2>());
             Assert.IsFalse(new EnumSelection(EnumTest1.Value1).IsEnumClass(typeof(EnumTest2)));
         }
+
+        [Test]
+        public void CanParse()
+        {
+            Assert.IsTrue(new EnumSelection(EnumTest1.Value1).CanParse());
+            Assert.IsFalse(new EnumSelection(typeof(EnumTest1)).CanParse());
+            Assert.IsFalse(new EnumSelection().CanParse());
+            Assert.IsFalse(new EnumSelection()
+            {
+                AssemblyName = typeof(EnumTest1).Assembly.GetName().Name,
+                ClassName = typeof(EnumTest1).FullName,
+                ClassValue = "Invalid",
+            }.CanParse());
+        }
     }
 
     public enum EnumTest1
